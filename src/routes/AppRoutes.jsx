@@ -1,14 +1,17 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
-import ForgotPassword from "../pages/ForgotPassword";
-import CreateAccount from "../pages/CreateAccount";
-import Menu from "../pages/Menu";
-import Reward from "../pages/Reward";
-import CampusClubs from "../pages/CampusClubs";
-import EventAndFacilities from "../pages/EventAndFacilities";
-import Transit from "../pages/Transit";
-import LMSLoading from "../pages/LMSLoading";
+
+
+import Login from "../pages/Login/Login";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+import CreateAccount from "../pages/CreateAccount/CreateAccount";
+import Menu from "../pages/Menu/Menu";
+import Reward from "../pages/Reward/Reward";
+import CampusClubs from "../pages/CampusClubs/CampusClubs";
+import EventAndFacilities from "../pages/EventAndFacilities/EventAndFacilities";
+import Transit from "../pages/Transit/Transit";
+import LMSLoading from "../pages/LMSLoading/LMSLoading";
+import HelpCenter from "../pages/HelpCenter/HelpCenter"
 
 function AppRoutes() {
   return (
@@ -22,6 +25,7 @@ function AppRoutes() {
       <Route path="/events" element={<EventAndFacilities />} />
       <Route path="/transit" element={<Transit />} />
       <Route path="/lms-loading" element={<LMSLoading />} />
+      <Route path="/help-Center" element={<HelpCenter/>}/>
     </Routes>
   );
 }

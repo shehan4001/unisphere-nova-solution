@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+
+
+.login-screen {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+
+.main-logo {
+  width: 95px;
+  margin: 0 auto;
+ 
+}
+
+.brand-title {
+  font-size: 26px;
+  color: #002c52;
+  font-weight: 700;
+  margin: 0;
+}
+
+.brand-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+
+.login-card {
+  background: white;
+  width: 610px;
+  padding: 18px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transform: translateY(-13px);
+}
+
+.welcome-text {
+  font-size: 24px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.instruction {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
+
+.input-box {
+  margin-bottom: 10px;
+}
+
+.input-box label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  outline: none;
+  font-size: 14px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.form-footer a {
+  color: #004a99;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+.login-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #003366; 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-submit-btn:hover {
+  background: #002244;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.create-account-link {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #004a99;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.secure-tag {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.secure-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; 
+}
+
+.secure-png {
+  width: 9px;  
+  height: auto;
+  opacity: 0.5; 
+}
+
+.secure-tag p {
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 0; 
+  text-transform: uppercase;
+}
+
+.help-center-link {
+  font-size: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  
+  appearance: none;
+  -webkit-appearance: none;
+  
+ 
+  width: 15px;
+  height: 15px;
+  border: 2px solid #cbd5e1; 
+  border-radius: 50%;        
+  background-color: #fff;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.checkbox-label input[type="checkbox"]:checked {
+  background-color: #003366; 
+  border-color: #003366;
+}
+
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 50px; 
+}
+
+.input-icon-png {
+  position: absolute;
+  right: 12px;
+  width: 18px;
+  height: auto;
+  opacity: 0.5;
+  pointer-events: none; 
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-btn .input-icon-png {
+  pointer-events: auto;
+}
+
+
+.toggle-btn:hover .input-icon-png {
+  opacity: 1; 
+  
+}
+
+
+@media (max-width: 768px) {
+  .login-card {
+    width: 90%;          
+    max-width: 500px;    
+    padding: 30px 40px;  
+  }
+
+  .main-logo {
+    width: 85px;         
+  }
+}
+
+
+@media (max-width: 480px) {
+  .login-card {
+    width: 92%;
+    padding: 25px 20px;  
+    border-radius: 15px; 
+  }
+
+  .welcome-text {
+    font-size: 20px;     
+  }
+
+  .instruction {
+    font-size: 12px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .login-submit-btn {
+    padding: 12px;       
+  }
+}
+
+
+
