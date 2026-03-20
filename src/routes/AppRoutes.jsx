@@ -10,8 +10,8 @@ import Reward from "../pages/Reward/Reward";
 import CampusClubs from "../pages/CampusClubs/CampusClubs";
 import EventAndFacilities from "../pages/EventAndFacilities/EventAndFacilities";
 import Transit from "../pages/Transit/Transit";
-import LMSLoading from "../pages/LMSLoading/LMSLoading";
-import HelpCenter from "../pages/HelpCenter/HelpCenter"
+import HelpCenter from "../pages/HelpCenter/HelpCenter";
+import StudentPortal from "../pages/StudentPortal/StudentPortal";
 
 function AppRoutes() {
   return (
@@ -24,8 +24,8 @@ function AppRoutes() {
       <Route path="/campus-clubs" element={<CampusClubs />} />
       <Route path="/events" element={<EventAndFacilities />} />
       <Route path="/transit" element={<Transit />} />
-      <Route path="/lms-loading" element={<LMSLoading />} />
       <Route path="/help-Center" element={<HelpCenter/>}/>
+      <Route path="/student-portal" element={<StudentPortal />} />
     </Routes>
   );
 }

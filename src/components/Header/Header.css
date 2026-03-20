@@ -1,0 +1,130 @@
+.main-header {
+  width: 100%;
+  height: 60px; 
+  background-color: #f8fafc; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* වම සහ දකුණ වෙන් කිරීමට */
+  padding: 0 40px;
+  border-bottom: 1px solid #e2e8f0; 
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  margin-left: -20px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0px; 
+  cursor: pointer;
+}
+
+.header-logo {
+  width: 70px; 
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo-section:hover .header-logo {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.header-brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b; 
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right; 
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b; 
+  line-height: 1.2;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #64748b; 
+  margin-top: 1px;
+}
+
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 2px solid #e2e8f0; 
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.08); 
+}
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 100px;
+  z-index: 100;
+  padding: 8px 0;
+}
+
+.menu-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #f1f5f9;
+}
+
+.menu-item.logout {
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
+  color: #ef4444; 
+  font-weight: 600;
+}
+
+.logout-icon-small {
+  width: 16px; 
+  height: auto;
+}

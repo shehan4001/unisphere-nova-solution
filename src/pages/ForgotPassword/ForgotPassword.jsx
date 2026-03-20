@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Link එක import කරන්න
 import './ForgotPassword.css';
 import bgImage from '../../assets/images/background.png'; 
 import resetIcon from '../../assets/images/reset-icon.png'; 
@@ -11,12 +11,10 @@ const ForgotPassword = () => {
 
   return (
     <div className="reset-screen">
-     
       <div className="background-container">
         <img src={bgImage} alt="background" className="bg-image" />
       </div>
 
-      
       <div className="reset-main-content">
         <div className="reset-card">
           <div className="reset-header">
@@ -28,15 +26,13 @@ const ForgotPassword = () => {
           <div className="reset-body">
             <h2>Reset Your Password</h2>
             <p>
-              For security reasons, password resets are handled centrally. Please 
-              contact the <span>UniSphere Help Service</span> to verify your identity and 
-              restore access to your account.
+              For security reasons, password resets are handled centrally. Please contact the <Link to="/help-Center" className="help-link-text">UniSphere Help Service</Link> to verify your identity and restore access to your account.
             </p>
 
-            <button className="contact-btn" onClick={() => navigate('/help-center')}>
+            <button className="contact-btn" onClick={() => navigate('/help-Center')}>
               <img src={contactIcon} alt="Contact" className="btn-png-icon" /> 
-                Contact Help Service
-              </button>
+              Contact Help Service
+            </button>
 
             <div className="back-to-login-container">
               <img src={returnArrow} alt="Return" className="return-png-icon" />
@@ -47,9 +43,6 @@ const ForgotPassword = () => {
           </div>
         </div>
       </div>
-
-      
-      
     </div>
   );
 };
