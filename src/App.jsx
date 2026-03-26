@@ -6,11 +6,11 @@ import './App.css';
 
 function App() {
   return (
-    
+
     <Router>
       <div className="min-h-screen bg-gray-100">
         <AppRoutes />
-        
+
       </div>
     </Router>
   );

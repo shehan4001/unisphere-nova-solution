@@ -43,7 +43,7 @@ const CreateAccount = () => {
             </div>
 
             <div className="contact-section">
-              <h3>DIRECT CONTACT INFORMATION</h3>
+              <p>DIRECT CONTACT INFORMATION</p>
               
               
               <div className="contact-card">

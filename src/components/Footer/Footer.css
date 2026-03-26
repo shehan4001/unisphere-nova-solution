@@ -18,24 +18,19 @@
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1px;
 }
 
 
 
 .footer-logo-img {
-  width: 28px;      
-  height: 28px;     
+  width: 70px;      
+  height: 60px;     
   object-fit: contain; 
   display: block;
 }
 
 
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 1px;
-}
 
 .logo-text {
   color: #64748b;
@@ -47,7 +42,8 @@
 .footer-copyright {
   color: #94a3b8;
   font-size: 0.875rem;
-  margin: 5px 0;
+  margin: 1px 0;
+
 }
 
 

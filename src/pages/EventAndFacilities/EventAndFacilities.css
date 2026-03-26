@@ -1,0 +1,425 @@
+*{
+margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif; 
+}
+body, h1, h2, h3, h4, p, span, button, input {
+  font-family: 'Inter', sans-serif;
+}
+
+.event-facilities-page {
+  background-image: var(--page-bg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.ef-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+
+.ef-banner {
+  background: linear-gradient(to right,
+    rgba(1, 41, 80, 0.9),
+    rgba(1, 41, 80, 0.5),
+    transparent), var(--banner-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  min-height: 300px; 
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  margin-bottom: 50px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.ef-banner h1 { 
+  font-size: 50px; 
+  max-width: 500px; 
+  margin-bottom: 10px; 
+  font-weight: 650;
+  color: #ffffff;
+}
+
+.ef-banner p { 
+  max-width: 400px; 
+  font-size: 16px; 
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.ef-section { 
+  margin-bottom: 60px; 
+}
+
+.ef-section h3 { 
+  font-size: 22px; 
+  color: #1a3a5f; 
+  margin-bottom: 25px; 
+  font-weight: 600; 
+}
+
+.ef-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.ef-view-more { 
+  font-size: 14px; 
+  color: #6c757d; 
+  font-weight: 500; 
+  cursor: pointer;
+}
+
+.ef-sub-desc { 
+  color: #6c757d; 
+  font-size: 14px; 
+  margin-top: -15px; 
+  margin-bottom: 25px; 
+}
+
+
+.facilities-scroll { 
+  display: grid; 
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 30px; 
+}
+
+.ef-facility-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  cursor: pointer; 
+}
+
+.ef-facility-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border-color: #e2e8f0;
+}
+
+.ef-icon-container {
+  width: 20px; 
+  height: 40px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ef-facility-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ef-facility-card p { 
+  font-weight: 750; 
+  color: #1a3a5f; 
+  font-size: 15px; 
+  margin: 0;
+}
+
+
+
+.ef-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+
+.ef-event-card {
+  display: flex;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  align-items: center;
+  gap: 25px;
+  border: 1px solid #f0f4f8;
+  transition: background-color 0.2s;
+}
+
+
+
+.ef-event-card:hover {
+  background-color: #fcfdfe;
+}
+
+
+
+.ef-event-date {
+  background: #e6f7ff;
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 75px;
+  text-align: center;
+}
+
+
+
+.ef-date-num {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0056B3;
+}
+
+
+
+.ef-date-month {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0056B3;
+  text-transform: uppercase;
+}
+
+
+
+.ef-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+
+
+.ef-tag {
+  background: #ebf4ff;
+  color: #3b82f6;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+
+
+.ef-time {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+
+
+.ef-event-details h4 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #1e293b;
+  font-weight: 750;
+}
+
+
+
+.ef-event-details p {
+  color: #64748b;
+  font-size: 13px;
+  margin: 0;
+  font-weight: 100;
+
+}
+
+.ef-spaces-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px; 
+}
+
+.ef-space-card { 
+  background: white; 
+  border-radius: 18px; 
+  overflow: hidden; 
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f0f4f8;
+}
+
+.ef-space-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 86, 179, 0.1);
+}
+
+.ef-space-img-container {
+  width: 100%;
+  height: 220px;
+  background-color: #f8fafc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ef-space-card img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ef-space-info { 
+  padding: 24px; 
+  flex-grow: 1;
+}
+
+.ef-space-info h4 { 
+  font-size: 19px; 
+  color: #1a3a5f; 
+  margin-bottom: 8px; 
+  font-weight: 700;
+}
+
+.ef-space-info p { 
+  font-size: 14.5px; 
+  color: #64748b; 
+  line-height: 1.6; 
+  margin: 0;
+}
+
+
+.ef-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+}
+
+.ef-modal-card {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: efModalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes efModalSlideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ef-modal-banner {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+.ef-modal-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ef-close-btn {
+  position: absolute;
+  top: 15px; right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 35px; height: 35px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e293b;
+  transition: background 0.2s;
+}
+
+.ef-modal-body {
+  padding: 30px;
+}
+
+.ef-modal-body h2 {
+  font-size: 26px;
+  color: #1e293b;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.ef-modal-desc {
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.ef-modal-contact {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid #0056b3;
+}
+
+.contact-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ef-modal-contact p {
+  margin: 0;
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 16px;
+}
+
+.ef-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ef-tag-pill {
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+
+@media (max-width: 992px) {
+  .ef-spaces-grid { grid-template-columns: repeat(2, 1fr); }
+  .facilities-scroll { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .facilities-scroll { grid-template-columns: repeat(2, 1fr); }
+  .ef-event-card { flex-direction: column; align-items: flex-start; }
+  .ef-spaces-grid { grid-template-columns: 1fr; }
+  .ef-modal-card { max-width: 100%; }
+}

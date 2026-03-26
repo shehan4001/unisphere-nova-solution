@@ -1,0 +1,94 @@
+.reports-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.analytics-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.analytics-card h3 {
+  font-size: 1.1rem;
+  color: #1e3a5f;
+  margin-bottom: 20px;
+}
+
+.chart-area {
+  height: 300px;
+  background-color: #f8fafc; /* පින්තූරයේ තියෙන ලා අළු පාට */
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.legend-overlay {
+  text-align: left;
+  line-height: 1.8;
+  color: #444;
+}
+
+.activity-log-container {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.download-pdf-btn {
+  background: none;
+  border: none;
+  color: #555;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.analytics-table th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid #f1f5f9;
+  color: #1e3a5f;
+}
+
+.analytics-table td {
+  padding: 15px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.95rem;
+}
+
+/* Status Badges */
+.badge-status {
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-status.completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-status.pending {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
