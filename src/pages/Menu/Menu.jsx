@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import Footer from '../../components/Footer/Footer'; 
 import { useNavigate } from "react-router-dom";
@@ -126,5 +125,3 @@ const Menu = () => {
 };
 
 export default Menu;
-=======
->>>>>>> dev-shehan
