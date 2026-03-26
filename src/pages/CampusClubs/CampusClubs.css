@@ -1,3 +1,4 @@
+/* CampusClubs.css */
 
 * {
   margin: 0;
@@ -17,11 +18,9 @@ body, h1, h2, h3, h4, p, span, button {
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
- 
 }
 
 .clubs-overlay-content {
- 
   min-height: 100vh;
   padding: 40px 6%;
 }
@@ -34,16 +33,14 @@ body, h1, h2, h3, h4, p, span, button {
 }
 
 .clubs-section h2 {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #0F172A;
-    margin-top: 40px;
-    margin-bottom: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0F172A;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
-
-
 
 .search-section {
   display: flex;
@@ -90,7 +87,6 @@ body, h1, h2, h3, h4, p, span, button {
   cursor: pointer;
 }
 
-
 .category-filters {
   display: flex;
   flex-wrap: wrap;
@@ -111,7 +107,6 @@ body, h1, h2, h3, h4, p, span, button {
   color: white;
 }
 
-
 .clubs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -124,8 +119,8 @@ body, h1, h2, h3, h4, p, span, button {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-
 
 .club-card:hover {
   transform: translateY(-8px);
@@ -138,8 +133,6 @@ body, h1, h2, h3, h4, p, span, button {
   background-position: center;
   position: relative;
 }
-
-
 
 .club-info {
   padding: 30px 20px 20px;
@@ -162,7 +155,6 @@ body, h1, h2, h3, h4, p, span, button {
   overflow: hidden;
   margin-bottom: 20px;
 }
-
 
 .join-btn-disabled {
   width: 100%;

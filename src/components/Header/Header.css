@@ -4,7 +4,7 @@
   background-color: #f8fafc; 
   display: flex;
   align-items: center;
-  justify-content: space-between; /* වම සහ දකුණ වෙන් කිරීමට */
+  justify-content: space-between; 
   padding: 0 40px;
   border-bottom: 1px solid #e2e8f0; 
   box-sizing: border-box;
@@ -12,7 +12,6 @@
   top: 0;
   z-index: 1000;
 }
-
 
 .header-left {
   display: flex;
@@ -45,7 +44,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-
 .header-right {
   display: flex;
   align-items: center;
@@ -77,20 +75,31 @@
   align-items: center;
 }
 
-.profile-pic {
+/* --- අකුරු පෙන්වන රවුම සඳහා නව Styling (Updated) --- */
+.user-initials-circle {
   width: 40px;
   height: 40px;
-  border-radius: 50%; 
-  object-fit: cover; 
-  border: 2px solid #e2e8f0; 
+  background: linear-gradient(135deg, #1e293b, #334155); /* තද නිල් පැහැති Gradient එකක් */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  user-select: none; /* අකුරු select වීම වැළැක්වීමට */
 }
 
-.profile-pic:hover {
-  transform: scale(1.08); 
+.user-initials-circle:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #334155, #475569);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-color: #cbd5e1;
 }
-
 
 .dropdown-menu {
   position: absolute;
@@ -100,9 +109,15 @@
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  min-width: 100px;
+  min-width: 130px; /* ටිකක් පළල් කළා ලස්සන වෙන්න */
   z-index: 100;
   padding: 8px 0;
+  animation: fadeIn 0.2s ease-out; /* පෙනී සිටීමේ Animation එක */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .menu-item {
@@ -110,6 +125,8 @@
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .menu-item:hover {
