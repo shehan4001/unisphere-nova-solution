@@ -1,26 +1,42 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Header.css';
 import logoutIcon from '../../assets/images/logout.png';
-import logoImg from '../../assets/images/logo.png'; 
+import logoImg from '../../assets/images/logo.png';
 
 const Header = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null); 
-  
-  const [user, setUser] = useState({ 
-    name: "Student", 
-    role: "Student", 
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const menuRef = useRef(null);
+
+  const [user, setUser] = useState({
+    dbId: "",      
+    displayId: "", 
+    name: "",
+    email: "",
+    role: "Student"
   });
 
+  const [formData, setFormData] = useState({ name: "", email: "" });
+
   useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-    
-    if (savedUser) {
+    const saved = localStorage.getItem('user');
+    if (saved) {
+      const savedUser = JSON.parse(saved);
+      // Database අනුව දත්ත ගැලපීම
       setUser({
-        name: savedUser.FullName || "Student",
-        role: savedUser.Role || "Student",
+        dbId: savedUser.ID || "",
+        displayId: savedUser.CustomID || "N/A", 
+        name: savedUser.FullName || "User",
+        email: savedUser.Email || "",
+        role: savedUser.Role || "User"
+      });
+      setFormData({ 
+        name: savedUser.FullName || "", 
+        email: savedUser.Email || "" 
       });
     }
 
@@ -29,34 +45,51 @@ const Header = () => {
         setIsMenuOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // --- නමේ මුල් අකුරු ලබාගැනීමේ Function එක ---
   const getInitials = (name) => {
-    if (!name) return "S";
-    const nameArray = name.trim().split(" ");
+    if (!name || typeof name !== 'string') return "U";
+    const nameArray = name.trim().split(/\s+/); // ඉඩ කිහිපයක් තිබුණද නිවැරදිව වෙන් කරයි
     if (nameArray.length >= 2) {
-      // නමේ කොටස් දෙකක් හෝ වැඩි ගණනක් ඇත්නම් මුල් අකුරු දෙකම ගනී (උදා: Kamal Perera -> KP)
       return (nameArray[0].charAt(0) + nameArray[1].charAt(0)).toUpperCase();
     }
-    // එක නමක් පමණක් ඇත්නම් එහි මුල් අකුර පමණක් ගනී
     return nameArray[0].charAt(0).toUpperCase();
   };
 
-  const handleLogout = () => {
-    localStorage.clear(); 
-    navigate('/login'); 
+  const handleSave = async () => {
+    if (!user.dbId) {
+      alert("Error: User session expired. Please Logout and Login again.");
+      return;
+    }
+
+    try {
+      // Backend route එකට අනුකූලව API call එක
+      await axios.put(`http://localhost:5000/api/students/update/${user.dbId}`, {
+        FullName: formData.name,
+        Email: formData.email
+      });
+
+      const stored = JSON.parse(localStorage.getItem('user'));
+      const updatedUser = { ...stored, FullName: formData.name, Email: formData.email };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      
+      setUser(prev => ({ ...prev, name: formData.name, email: formData.email }));
+      setIsEditing(false);
+      alert("Profile updated successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Update failed! Please check backend console.");
+    }
   };
 
   return (
     <header className="main-header">
-      
       <div className="header-left">
-        <div className="logo-section" onClick={() => navigate('/menu')} style={{cursor: 'pointer'}}>
-          <img src={logoImg} alt="UniSphere Logo" className="header-logo" />
+        {/* CSSGap එක පාලනය කිරීමට inline style එකක් හෝ CSS පන්තියක් භාවිතා කළ හැක */}
+        <div className="logo-section" onClick={() => navigate('/menu')} style={{cursor: 'pointer', gap: '8px'}}>
+          <img src={logoImg} alt="UniSphere Logo" className="header-logo" style={{width: '60px'}} />
           <span className="header-brand-name">UniSphere</span>
         </div>
       </div>
@@ -66,26 +99,61 @@ const Header = () => {
           <span className="user-name">{user.name}</span>
           <span className="user-role">{user.role}</span>
         </div>
-        
         <div className="profile-container" ref={menuRef}>
-          {/* පින්තූරයක් වෙනුවට මුල් අකුරු සහිත රවුම පෙන්වීම */}
-          <div 
-            className="user-initials-circle" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <div className="user-initials-circle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {getInitials(user.name)}
           </div>
-
           {isMenuOpen && (
             <div className="dropdown-menu">
-              <div className="menu-item logout" onClick={handleLogout}>
-                <img src={logoutIcon} alt="Logout" className="logout-icon-small" />
-                Logout
+              <div className="menu-item" onClick={() => { setIsProfileOpen(true); setIsMenuOpen(false); }}>
+                <span className="menu-icon">👤</span> View Profile
+              </div>
+              <div className="menu-divider"></div>
+              <div className="menu-item logout" onClick={() => { localStorage.clear(); navigate('/login'); }}>
+                <img src={logoutIcon} alt="Logout" className="logout-icon-small" /> Logout
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {isProfileOpen && (
+        <div className="modal-overlay">
+          <div className="profile-popup-card">
+            <button className="close-x-btn" onClick={() => {setIsProfileOpen(false); setIsEditing(false);}}>&times;</button>
+            <div className="popup-header">
+              <div className="popup-avatar-circle">{getInitials(user.name)}</div>
+              <h3>{isEditing ? "Edit Profile" : "User Profile"}</h3>
+            </div>
+            <div className="popup-body">
+              <div className="popup-input-group">
+                <label>User ID</label>
+                <input type="text" value={user.displayId} disabled className="input-read-only" />
+              </div>
+              <div className="popup-input-group">
+                <label>Full Name</label>
+                <input type="text" value={formData.name} disabled={!isEditing}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})} />
+              </div>
+              <div className="popup-input-group">
+                <label>Email Address</label>
+                <input type="email" value={formData.email} disabled={!isEditing}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})} />
+              </div>
+            </div>
+            <div className="popup-footer">
+              {!isEditing ? (
+                <button className="btn-edit-mode" onClick={() => setIsEditing(true)}>Edit Profile</button>
+              ) : (
+                <div className="edit-btn-container">
+                  <button className="btn-save-action" onClick={handleSave}>Save Changes</button>
+                  <button className="btn-cancel-action" onClick={() => setIsEditing(false)}>Cancel</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

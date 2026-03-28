@@ -156,7 +156,7 @@ const Sidebar = () => {
                 </div>
                 <div className="modal-body">
                   <div className="info-item"><span>Email Address</span><p>{adminData.email || "Not Set"}</p></div>
-                  <div className="info-item"><span>Contact Number</span><p>{adminData.contact || "Not Set"}</p></div>
+                  <div className="info-item"><span>Contact Number</span><p>{adminData.contact || "+94 76 123 4567"}</p></div>
                 </div>
                 <button className="edit-profile-btn" onClick={() => setIsEditing(true)}>Edit Profile Information</button>
               </>

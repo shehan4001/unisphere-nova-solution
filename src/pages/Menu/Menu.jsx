@@ -1,125 +1,123 @@
-import React, { useState, useEffect } from "react";
-import Footer from '../../components/Footer/Footer'; 
-import { useNavigate } from "react-router-dom";
-import "./Menu.css";
-
-import rewardIcon from "../../assets/images/Vector.svg";
-import clubIcon from "../../assets/images/club.svg";
-import transitIcon from "../../assets/images/transist.svg";
-import eventIcon from "../../assets/images/event.svg";
-import portal from "../../assets/images/portal.svg";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header'; 
+import Footer from '../../components/Footer/Footer';
+import './Menu.css';
 
 const Menu = () => {
   const navigate = useNavigate();
-  const [currentDate, setCurrentDate] = useState("");
+  const [studentName, setStudentName] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
-    const updateDate = () => {
-      const now = new Date();
-      
-      const options = { weekday: 'long', month: 'long', day: 'numeric' };
-      let dateString = now.toLocaleDateString('en-US', options);
-      
-      
-      const day = now.getDate();
-      let suffix = "th";
-      if (day === 1 || day === 21 || day === 31) suffix = "st";
-      else if (day === 2 || day === 22) suffix = "nd";
-      else if (day === 3 || day === 23) suffix = "rd";
-      
-      setCurrentDate(`${dateString}${suffix}`);
-    };
+    // 1. LocalStorage එකෙන් Login වුණු User ව ගන්නවා
+    const storedUser = JSON.parse(localStorage.getItem('user'));
 
-    updateDate();
-  }, []);
+    if (storedUser && storedUser.FullName) {
+      // Login වුණු කෙනාගේ නම විතරක් පෙන්වීමට Set කරනවා
+      setStudentName(storedUser.FullName);
+    } else {
+      // User කෙනෙක් නැත්නම් (Logout වෙලා නම්) කෙලින්ම Login එකට පන්නනවා
+      navigate('/login');
+    }
+
+    // 2. අද දිනය ලබා ගැනීම (Monday, October 23rd වැනි Format එකට)
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    const today = new Date().toLocaleDateString('en-US', options);
+    setCurrentDate(today);
+  }, [navigate]);
 
   return (
-    <div className="menu-wrapper">
-      <div className="menu-container">
-        
-        
-        <header className="menu-header">
-          <div className="welcome-texts">
-            <h2 className="welcome-title">Welcome back, Alex! 👋</h2>
-            <p className="welcome-date">{currentDate}</p>
-          </div>
-        </header>
+    <div className="menu-page">
+      <Header />
+      
+      <main className="menu-container">
+        {/* Welcome Section - දැන් මෙතනට නියම නම වැටෙනවා */}
+        <section className="welcome-section">
+          <h1>Welcome back, {studentName || 'Student'}! 👋</h1>
+          <p className="current-date">{currentDate}</p>
+        </section>
 
-        
-        <section className="academic-banner">
-          <div className="academic-content">
-            <h3 className="academic-title">Academic Hub</h3>
-            <p className="academic-description">
-              Access your grades, enrollment status, financial aid, and official
-              documents all in one place.
-            </p>
+        {/* Academic Hub Banner */}
+        <div className="academic-hub-banner">
+          <div className="banner-content">
+            <h2>Academic Hub</h2>
+            <p>Access your grades, enrollment status, financial aid, and official documents all in one place.</p>
             <button 
               className="portal-btn" 
-              onClick={() => navigate("/student-portal")}
+              onClick={() => navigate('/student-portal')}
             >
-              <img src={portal} alt="portal icon" className="portal-icon"/>
               Go to Student Portal
             </button>
           </div>
-        </section>
+        </div>
 
-      
+        {/* Grid Cards */}
         <div className="menu-grid">
-         
+          
+          {/* Card 1: Rewards */}
           <div className="menu-card">
-            <div className="card-img rewards-bg"></div>
-            <div className="card-info">
-              <h4>Check-in & Rewards</h4>
+            <div className="card-image rewards-bg"></div>
+            <div className="card-body">
+              <h3>Check-in & Rewards</h3>
               <p>Scan in, track visits, and earn rewards.</p>
-              <button className="view-btn" onClick={() => navigate("/reward")}>
-                <img src={rewardIcon} className="btn-icon" alt="reward" />
+              <button 
+                className="card-action-btn" 
+                onClick={() => navigate('/reward')}
+              >
                 View Rewards
               </button>
             </div>
           </div>
 
-          
+          {/* Card 2: Campus Clubs */}
           <div className="menu-card">
-            <div className="card-img clubs-bg"></div>
-            <div className="card-info">
-              <h4>Campus Clubs Connector</h4>
+            <div className="card-image clubs-bg"></div>
+            <div className="card-body">
+              <h3>Campus Clubs Connector</h3>
               <p>Discover clubs, join events, and connect with students.</p>
-              <button className="view-btn" onClick={() => navigate("/campus-clubs")}>
-                <img src={clubIcon} className="btn-icon" alt="club" />
+              <button 
+                className="card-action-btn" 
+                onClick={() => navigate('/campus-clubs')}
+              >
                 Explore Community
               </button>
             </div>
           </div>
 
-          
+          {/* Card 3: Transit */}
           <div className="menu-card">
-            <div className="card-img transit-bg"></div>
-            <div className="card-info">
-              <h4>Transit & Navigation</h4>
+            <div className="card-image transit-bg"></div>
+            <div className="card-body">
+              <h3>Transit & Navigation</h3>
               <p>Live routes, directions, and campus maps.</p>
-              <button className="view-btn" onClick={() => navigate("/transit")}>
-                <img src={transitIcon} className="btn-icon" alt="transit" />
+              <button 
+                className="card-action-btn" 
+                onClick={() => navigate('/transit')}
+              >
                 View Routes
               </button>
             </div>
           </div>
 
-          
+          {/* Card 4: Events */}
           <div className="menu-card">
-            <div className="card-img events-bg"></div>
-            <div className="card-info">
-              <h4>Facility & Event Updates</h4>
+            <div className="card-image events-bg"></div>
+            <div className="card-body">
+              <h3>Facility & Event Updates</h3>
               <p>Latest announcements, schedules, and campus events.</p>
-              <button className="view-btn" onClick={() => navigate("/events")}>
-                <img src={eventIcon} className="btn-icon" alt="event" />
+              <button 
+                className="card-action-btn" 
+                onClick={() => navigate('/events')}
+              >
                 Explore Events
               </button>
             </div>
           </div>
         </div>
-      
         <Footer/>
-      </div>
+      </main>
+      
     </div>
   );
 };

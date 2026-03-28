@@ -16,14 +16,12 @@
 .admin-page-content {
   flex: 1;
   padding: 40px;
-  /* --- මෙන්න මේ කොටස විතරයි මම අලුතින් එකතු කළේ --- */
   background-image: linear-gradient(rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.95)), 
                     var(--bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  /* -------------------------------------------- */
 }
 
 /* --- Header & Buttons --- */
@@ -32,6 +30,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .page-header-simple h1 {
@@ -39,6 +38,7 @@
   color: #1e3a5f;
   font-weight: 800;
   letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .btn-add-club {
@@ -86,8 +86,14 @@
   margin-bottom: 20px;
 }
 
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* මෙයින් button එක දකුණු පැත්තට ගෙන යයි */
+  margin-top: 20px;
+}
+
 .publish-btn {
-  background-color: #1e3a5f; /* තද නිල් පාට */
+  background-color: #1e3a5f;
   color: white;
   padding: 12px 25px;
   border: none;
@@ -100,12 +106,7 @@
 }
 
 .publish-btn:hover {
-  background-color: #2c5282; /* Mouse එක ගෙනිච්චම වෙනස් වන පාට */
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end; /* බටන් එක වම් පැත්තට තබා ගැනීමට */
+  background-color: #2c5282;
 }
 
 .form-group {
@@ -123,7 +124,7 @@
 
 .form-group input, 
 .form-group textarea, 
-.filter-dropdown {
+.form-group select {
   padding: 12px 15px;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
@@ -144,17 +145,12 @@
   resize: none;
 }
 
-/* --- Requests Table Styles --- */
+/* --- Table Styles --- */
 .requests-section {
   background: white;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-}
-
-.requests-table-container {
-  width: 100%;
-  overflow-x: auto;
 }
 
 .requests-table {
@@ -178,7 +174,10 @@
   font-size: 14px;
 }
 
-/* --- UI Elements (Tags & Buttons) --- */
+.requests-table tr:hover {
+  background-color: #f8fafc;
+}
+
 .club-tag {
   background: #eff6ff;
   color: #1e3a5f;
@@ -188,29 +187,61 @@
   font-weight: 700;
 }
 
+/* --- NEW ACTION BUTTON STYLES --- */
 .action-btns {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  align-items: center;
 }
 
+.action-btns button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Approve - Dark Blue */
 .btn-approve {
-  background: #1e3a5f;
+  background-color: #1e3a5f;
   color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
+}
+.btn-approve:hover {
+  background-color: #152c4a;
+  transform: translateY(-1px);
 }
 
+/* Reject - Soft Red */
 .btn-reject {
-  background: #fff1f2;
+  background-color: #fff1f2;
   color: #ef4444;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
+  border: 1px solid #fecaca !important;
+}
+.btn-reject:hover {
+  background-color: #fee2e2;
+}
+
+/* Edit - Light Blue Style */
+.btn-edit {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe !important;
+}
+.btn-edit:hover {
+  background-color: #dbeafe;
+}
+
+/* Delete - Solid Red */
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #dc2626;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
 }
 
 /* --- Animations --- */

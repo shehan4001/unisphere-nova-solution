@@ -20,12 +20,8 @@
     "multer": "^2.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-<<<<<<< HEAD
     "react-router-dom": "^7.13.1",
     "recharts": "^3.8.0"
-=======
-    "react-router-dom": "^7.13.1"
->>>>>>> 3084e1a0a5e6eee72b7eef301abc4142488c01f4
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

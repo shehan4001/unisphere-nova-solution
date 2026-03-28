@@ -1,147 +1,268 @@
+/* --- Header එකේ මූලික Styling --- */
 .main-header {
   width: 100%;
-  height: 60px; 
-  background-color: #f8fafc; 
+  height: 60px;
+  background-color: #f8fafc;
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   padding: 0 40px;
-  border-bottom: 1px solid #e2e8f0; 
+  border-bottom: 1px solid #e2e8f0;
   box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.header-left {
+.header-left, .logo-section {
   display: flex;
   align-items: center;
-  margin-left: -20px;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 0px; 
   cursor: pointer;
+  gap: 8px;
 }
 
 .header-logo {
-  width: 70px; 
-  height: auto;
+  width: 70px;
+  margin-right: -20px;
   transition: transform 0.3s ease;
-}
-
-.logo-section:hover .header-logo {
-  transform: rotate(10deg) scale(1.1);
 }
 
 .header-brand-name {
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b; 
-  letter-spacing: 0.5px;
+  color: #1e293b;
   font-family: 'Poppins', sans-serif;
+  margin-left: 0;
+  
 }
 
+/* --- User Info & Circle Section --- */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
-  text-align: right; 
+  text-align: right;
 }
 
 .user-name {
   font-size: 14px;
   font-weight: 700;
-  color: #1e293b; 
-  line-height: 1.2;
+  color: #1e293b;
 }
 
 .user-role {
   font-size: 11px;
-  color: #64748b; 
-  margin-top: 1px;
+  color: #64748b;
 }
 
-.profile-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* --- අකුරු පෙන්වන රවුම සඳහා නව Styling (Updated) --- */
 .user-initials-circle {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #1e293b, #334155); /* තද නිල් පැහැති Gradient එකක් */
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #1e293b, #334155);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 15px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  user-select: none; /* අකුරු select වීම වැළැක්වීමට */
+  border: 2px solid #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
-.user-initials-circle:hover {
-  transform: scale(1.08);
-  background: linear-gradient(135deg, #334155, #475569);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-color: #cbd5e1;
+/* --- Logout Dropdown (image_f467bb.png අනුව) --- */
+.profile-container {
+  position: relative;
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0;
-  background-color: white;
-  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  min-width: 180px;
+  padding: 8px;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.menu-item {
+  padding: 12px 14px;
+  font-size: 14px;
+  cursor: pointer;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  min-width: 130px; /* ටිකක් පළල් කළා ලස්සන වෙන්න */
-  z-index: 100;
-  padding: 8px 0;
-  animation: fadeIn 0.2s ease-out; /* පෙනී සිටීමේ Animation එක */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: 0.2s;
+  color: #1e293b;
+}
+
+.menu-item:hover {
+  background: #f8fafc;
+}
+
+.menu-icon {
+  font-size: 16px;
+}
+
+.logout-icon-small {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.menu-item.logout {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.menu-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 6px 0;
+}
+
+/* --- PROFILE POPUP (MODAL) SECTION (New Club style එකට අනුව) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.profile-popup-card {
+  background: white;
+  width: 420px;
+  padding: 35px;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-x-btn {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: none; border: none;
+  font-size: 26px; cursor: pointer; color: #94a3b8;
+}
+
+.popup-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.popup-avatar-circle {
+  width: 70px;
+  height: 70px;
+  background: #0d3b66;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 auto 12px;
+}
+
+/* Form Inputs (image_f385df.png අනුව) */
+.popup-input-group {
+  margin-bottom: 20px; /* පරතරය මඳක් වැඩි කරන ලදී */
+  text-align: left;
+}
+
+.popup-input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.popup-input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.popup-input-group input:focus {
+  border-color: #0d3b66;
+  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.1);
+}
+
+.input-read-only {
+  background: #f8fafc;
+  color: #94a3b8 !important;
+  cursor: not-allowed;
+  border: 1px dashed #cbd5e1 !important; /* Read-only බව පෙන්වීමට මඳක් වෙනස් කරන ලදී */
+}
+
+/* Buttons (Create button style එකට අනුව) */
+.btn-edit-mode, .btn-save-action {
+  width: 100%;
+  padding: 14px;
+  background: #0d3b66;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.btn-edit-mode:hover, .btn-save-action:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.edit-btn-container {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cancel-action {
+  flex: 1;
+  padding: 14px;
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cancel-action:hover {
+  background: #fecaca;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-.menu-item {
-  padding: 10px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-}
-
-.menu-item:hover {
-  background-color: #f1f5f9;
-}
-
-.menu-item.logout {
-  display: flex;
-  align-items: center; 
-  gap: 10px; 
-  color: #ef4444; 
-  font-weight: 600;
-}
-
-.logout-icon-small {
-  width: 16px; 
-  height: auto;
 }

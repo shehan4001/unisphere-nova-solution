@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // useEffect එක් කළා
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './Dashboard.css';
+import axios from 'axios'; // axios එක් කළා
 import dashboardBg from '../../../assets/images/banner-bg.png';
 
-// --- අයිකන රූප 7 මෙහිදී Import කරන්න ---
 import ClubsIcon from '../../../assets/images/clubs-icon.png';
 import RequestsIcon from '../../../assets/images/requests-icon.png';
 import EventsIcon from '../../../assets/images/events-icon.png';
@@ -16,17 +16,39 @@ import ReportsIcon from '../../../assets/images/reports-icon.png';
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // --- Stats Grid සඳහා දත්ත (Icons 4) ---
-  const [stats] = useState([
-    { id: 1, label: 'Total Clubs', value: 12, icon: ClubsIcon, color: '#1e3a5f', path: '/admin/clubs' },
-    { id: 2, label: 'Pending Requests', value: 8, icon: RequestsIcon, color: '#f59e0b', path: '/admin/requests' },
-    { id: 3, label: 'Active Events', value: 5, icon: EventsIcon, color: '#10b981', path: '/admin/events' },
-    { id: 4, label: 'Total Students', value: 1250, icon: StudentsIcon, color: '#6366f1', path: '/admin/students' },
-  ]);
+  // 1. Stats සඳහා මුලින් බින්දුව (0) අගයන් ලබා දෙනවා
+  const [liveStats, setLiveStats] = useState({
+    totalClubs: 0,
+    pendingRequests: 0,
+    activeEvents: 0,
+    totalStudents: 0
+  });
+
+  // 2. Backend එකෙන් දත්ත ලබා ගැනීම
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        // ඔබ සකස් කළ අලුත් API එක මෙතැනදී Call කරනවා
+        const res = await axios.get('http://localhost:5000/api/dashboard/stats');
+        setLiveStats(res.data);
+      } catch (err) {
+        console.error("Error fetching dashboard stats:", err);
+      }
+    };
+    fetchDashboardData();
+  }, []);
+
+  // 3. Stats Grid එකට අදාළ දත්ත සකස් කිරීම
+  const statsDisplay = [
+    { id: 1, label: 'Total Clubs', value: liveStats.totalClubs, icon: ClubsIcon, color: '#1e3a5f' },
+    { id: 2, label: 'Pending Requests', value: liveStats.pendingRequests, icon: RequestsIcon, color: '#f59e0b' },
+    { id: 3, label: 'Active Events', value: liveStats.activeEvents, icon: EventsIcon, color: '#10b981' },
+    { id: 4, label: 'Total Students', value: liveStats.totalStudents, icon: StudentsIcon, color: '#6366f1' },
+  ];
 
   const [notifications] = useState([
-    { id: 1, message: "5 new club requests pending review.", type: "blue" },
-    { id: 2, message: "Campus wifi maintenance update posted.", type: "green" }
+    { id: 1, message: "System overview is up to date.", type: "blue" },
+    { id: 2, message: "Check pending club requests for approval.", type: "green" }
   ]);
 
   return (
@@ -44,14 +66,15 @@ const Dashboard = () => {
           </div>
         </header>
 
-        {/* --- Stats Grid --- */}
+        {/* --- Stats Grid (දැන් මෙහි Live Data පෙන්වයි) --- */}
         <div className="stats-grid">
-          {stats.map(stat => (
+          {statsDisplay.map(stat => (
             <div key={stat.id} className="stat-card animate-fade">
               <div className="stat-icon-wrapper" style={{ backgroundColor: `${stat.color}15` }}>
                 <img src={stat.icon} alt={stat.label} className="dashboard-stat-img" />
               </div>
               <div className="stat-info">
+                {/* 10ට අඩු අගයන් වලට ඉදිරියෙන් 0 එකතු කරයි (उदा: 08) */}
                 <h3>{stat.value < 10 ? `0${stat.value}` : stat.value.toLocaleString()}</h3>
                 <p>{stat.label}</p>
               </div>
@@ -60,7 +83,6 @@ const Dashboard = () => {
         </div>
 
         <div className="dashboard-main-content">
-          {/* --- Quick Actions (Icons 3) --- */}
           <section className="requests-section flex-2">
             <h3 className="section-title">Quick Actions</h3>
             <div className="action-cards-container">
@@ -79,7 +101,6 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* --- System Notifications --- */}
           <section className="requests-section flex-1">
             <h3 className="section-title">System Notifications</h3>
             <div className="notification-list">
