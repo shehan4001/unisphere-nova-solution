@@ -259,6 +259,7 @@
   .rib .rsub { display: none; }
 }
 
+
 @media (max-width: 600px) {
   .map-area { height: 420px; }
   .overlay-sidebar { width: 200px; }

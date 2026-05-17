@@ -27,7 +27,7 @@ const StudentRegistration = () => {
 
   const [studentList, setStudentList] = useState([]);
 
-  // --- 1. Database එකෙන් දත්ත ලබා ගැනීම (Fetch) ---
+  
   const fetchStudents = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/register/all');
@@ -49,7 +49,7 @@ const StudentRegistration = () => {
     fetchStudents();
   }, []);
 
-  // ID එක auto-generate කිරීම
+  
   useEffect(() => {
     if (!isEditing) {
       if (studentList.length === 0) {
@@ -76,12 +76,12 @@ const StudentRegistration = () => {
     return matchesSearch && matchesFaculty;
   });
 
-  // --- 2. Submit Handler (Save/Update) ---
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isEditing) {
-        // --- නිවැරදි කළ Update Logic එක ---
+        
         await axios.put(`http://localhost:5000/api/register/${editId}`, {
             fullName: formData.name,
             email: formData.email,
@@ -90,7 +90,7 @@ const StudentRegistration = () => {
         });
         alert("Student Details Updated!");
       } else {
-        // අලුතින් Register කිරීම
+        
         const response = await axios.post('http://localhost:5000/api/register', {
           studentId: studentId,
           fullName: formData.name,
@@ -104,10 +104,10 @@ const StudentRegistration = () => {
         }
       }
       
-      // දත්ත Refresh කර Form එක Reset කිරීම
+     
       fetchStudents(); 
       setFormData({ name: '', faculty: '', email: '', password: '' });
-      setStudentId(''); // ID එකත් clear කිරීම
+      setStudentId(''); 
       setShowForm(false);
       setIsEditing(false);
       setEditId(null);
@@ -117,7 +117,7 @@ const StudentRegistration = () => {
     }
   };
 
-  // --- 3. Delete Handler ---
+
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this student?")) {
       try {

@@ -20,15 +20,15 @@ const Reports = () => {
       try {
         const res = await axios.get('http://localhost:5000/api/dashboard/analytics-data');
         
-        // වර්ණ ගැලපීමේදී අකුරු වල වැරදි මගහැරීමට සකස් කළ කොටස
+        
         const colorPalette = { 
           Academic: '#1e3a5f', Social: '#f59e0b', Sports: '#10b981', 
           Volunteering: '#6366f1', Default: '#8884d8' 
         };
 
         const formattedClubs = res.data.clubDistribution.map(item => ({
-          name: item.name.trim(), // අමතර space ඉවත් කිරීම
-          value: Number(item.value), // Number එකක් බව තහවුරු කිරීම
+          name: item.name.trim(), 
+          value: Number(item.value), 
           color: colorPalette[item.name.trim()] || colorPalette.Default
         }));
 
@@ -46,7 +46,7 @@ const Reports = () => {
     fetchAnalytics();
   }, []);
 
-  // PDF Download Function (පැහැදිලිව තබා ගන්න)
+ 
   const downloadPDF = () => {
     const doc = new jsPDF();
     doc.text("UniSphere Analytics Report", 14, 20);
@@ -69,7 +69,7 @@ const Reports = () => {
         </header>
 
         <div className="reports-charts-grid">
-          {/* Pie Chart Card */}
+         
           <div className="analytics-card">
             <h3>Club Distribution</h3>
             <div className="chart-area" style={{ height: '300px', width: '100%', position: 'relative' }}>
@@ -101,7 +101,7 @@ const Reports = () => {
             </div>
           </div>
 
-          {/* Line Chart Card */}
+        
           <div className="analytics-card">
             <h3>Monthly Event Growth</h3>
             <div className="chart-area" style={{ height: '300px', width: '100%' }}>
@@ -124,7 +124,7 @@ const Reports = () => {
           </div>
         </div>
 
-        {/* Recent Activity Table */}
+       
         <section className="activity-log-container">
           <div className="log-header">
             <h3>Recent Activity Log</h3>

@@ -235,6 +235,14 @@
   color: #94a3b8;
 }
 
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
 .modal-header h2 {
   color: #1e3a5f;
   margin: 10px 0 5px 0;

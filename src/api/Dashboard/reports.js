@@ -1,50 +1,73 @@
 import express from 'express';
 const router = express.Router();
 import sql from 'mssql';
-import config from '../../server/dbConfig.js'; 
+import config from '../../server/dbConfig.js';
 
 router.get('/analytics-data', async (req, res) => {
-    try {
-        let pool = await sql.connect(config);
+  try {
+    let pool = await sql.connect(config);
 
-        // 1. Club Distribution (Donut Chart එකට - value සහ name ලෙස)
-        const clubDist = await pool.request().query(`
-    SELECT LTRIM(RTRIM(Category)) as name, COUNT(*) as value 
-    FROM Clubs 
-    GROUP BY Category
-`);
+    const clubDist = await pool.request().query(`
+      SELECT 
+        ISNULL(NULLIF(LTRIM(RTRIM(Category)), ''), 'Other') AS name,
+        COUNT(*) AS value
+      FROM Clubs
+      GROUP BY ISNULL(NULLIF(LTRIM(RTRIM(Category)), ''), 'Other')
+    `);
 
-        // 2. Monthly Event Growth (Line Chart එකට)
-        const eventGrowth = await pool.request().query(`
-            SELECT FORMAT(EventDate, 'MMM') as month, COUNT(*) as events
-            FROM Events
-            WHERE YEAR(EventDate) = YEAR(GETDATE())
-            GROUP BY FORMAT(EventDate, 'MMM'), MONTH(EventDate)
-            ORDER BY MONTH(EventDate)
-        `);
+    const eventGrowth = await pool.request().query(`
+      SELECT 
+        FORMAT(EventDate, 'MMM') AS month,
+        MONTH(EventDate) AS monthNumber,
+        COUNT(*) AS events
+      FROM Events
+      WHERE YEAR(EventDate) = YEAR(GETDATE())
+      GROUP BY FORMAT(EventDate, 'MMM'), MONTH(EventDate)
+      ORDER BY MONTH(EventDate)
+    `);
 
-        // 3. Recent Activity Log (Table එකට)
-        const activityLog = await pool.request().query(`
-            SELECT TOP 10 * FROM (
-                SELECT CreatedAt as Date, 'Club' as Category, Name + ' Added' as Action, 'COMPLETED' as Status FROM Clubs
-                UNION ALL
-                SELECT CreatedAt as Date, 'Event' as Category, EventTitle + ' Scheduled' as Action, 'COMPLETED' as Status FROM Events
-                UNION ALL
-                SELECT CreatedAt as Date, 'Request' as Category, 'New Request: ' + ClubName as Action, UPPER(Status) as Status FROM ClubRequests
-            ) AS CombinedActivity
-            ORDER BY Date DESC
-        `);
+    const activityLog = await pool.request().query(`
+      SELECT TOP 10 * FROM (
+        SELECT 
+          CreatedAt AS Date,
+          'Club' AS Category,
+          Name + ' Added' AS Action,
+          'COMPLETED' AS Status
+        FROM Clubs
 
-        res.status(200).json({
-            clubDistribution: clubDist.recordset,
-            eventGrowth: eventGrowth.recordset,
-            recentActivity: activityLog.recordset
-        });
+        UNION ALL
 
-    } catch (err) {
-        console.error("Analytics Error:", err);
-        res.status(500).json({ error: err.message });
-    }
+        SELECT 
+          CreatedAt AS Date,
+          'Event' AS Category,
+          EventTitle + ' Scheduled' AS Action,
+          'COMPLETED' AS Status
+        FROM Events
+
+        UNION ALL
+
+        SELECT 
+          cr.CreatedAt AS Date,
+          'Request' AS Category,
+          'Club Request: ' + s.FullName + ' - ' + c.Name AS Action,
+          UPPER(cr.Status) AS Status
+        FROM ClubRequests cr
+        INNER JOIN Students s ON cr.StudentID = s.StudentID
+        INNER JOIN Clubs c ON cr.ClubID = c.ClubID
+      ) AS CombinedActivity
+      ORDER BY Date DESC
+    `);
+
+    res.status(200).json({
+      clubDistribution: clubDist.recordset,
+      eventGrowth: eventGrowth.recordset,
+      recentActivity: activityLog.recordset
+    });
+
+  } catch (err) {
+    console.error("Analytics Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 export default router;

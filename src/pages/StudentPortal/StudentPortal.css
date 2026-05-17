@@ -1,4 +1,4 @@
-/* මුළු තිරයම ආවරණය වන Container එක */
+
 .portal-splash-wrapper {
   height: 100vh;
   width: 100vw;
@@ -6,10 +6,10 @@
   justify-content: center;
   align-items: center;
   
-  /* අකුරු සඳහා Inter font එක සහ fallback fonts ලබා දීම */
+
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   
-  /* පසුබිම් පින්තූරය සඳහා සැකසුම් */
+ 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -33,20 +33,20 @@
 }
 
 .static-logo {
-  width: 290px; /* ඔයා සකස් කළ ලොකු ප්‍රමාණය */
+  width: 290px; 
   height: auto;
-  margin-bottom: -80px; /* ලෝගෝව සහ අකුරු අතර පරතරය අඩු කිරීමට */
+  margin-bottom: -80px; 
 }
 
 .brand-name {
   font-size: 38px;
   font-weight: 700;
   color: #001a33;
-  /* Font පවුල මෙතැනටත් ස්වයංක්‍රීයව අදාළ වේ */
+  
   margin: 0;
 }
 
-/* Loading කොටස */
+
 .loading-container {
   width: 260px;
 }
@@ -59,7 +59,7 @@
   font-weight: 600;
 }
 
-/* පිරී යන ඉරේ පථය */
+
 .loading-track {
   width: 100%;
   height: 4px;
@@ -69,7 +69,7 @@
   margin-bottom: 15px;
 }
 
-/* පිරී යන නිල් පැහැති ඉර (Animation) */
+
 .loading-bar-fill {
   height: 100%;
   width: 0%;

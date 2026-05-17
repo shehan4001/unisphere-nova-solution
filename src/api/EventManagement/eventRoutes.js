@@ -1,70 +1,82 @@
 import express from 'express';
 const router = express.Router();
-import sql from 'mssql'; 
-import config from '../../server/dbConfig.js'; 
+import sql from 'mssql';
+import config from '../../server/dbConfig.js';
 
-// 1. Get current and upcoming events (Time format එකත් එක්කම)
 router.get('/get-all', async (req, res) => {
     try {
         let pool = await sql.connect(config);
-        
-        // FORMAT(EventTime, 'hh:mm tt') මගින් 1970 දිනය අයින් කර වෙලාව පමණක් ලබාදෙයි
-        const sqlQuery = `
+
+        const result = await pool.request().query(`
             SELECT 
-                EventID, 
-                EventTitle, 
-                EventDate, 
-                Category, 
-                Location, 
-                PublishedBy,
-                FORMAT(CAST(EventTime AS DATETIME), 'hh:mm tt') AS EventTime
-            FROM Events 
-            WHERE EventDate >= CAST(GETDATE() AS DATE) 
-            ORDER BY EventDate ASC
-        `;
-        
-        let result = await pool.request().query(sqlQuery);
-        res.status(200).json(result.recordset); 
+                e.EventID,
+                e.AdminID,
+                e.EventTitle,
+                e.EventDate,
+                FORMAT(CAST(e.EventTime AS DATETIME), 'hh:mm tt') AS EventTime,
+                e.Category,
+                e.Location,
+                a.FullName AS PublishedBy,
+                e.CreatedAt
+            FROM Events e
+            INNER JOIN Admins a ON e.AdminID = a.AdminID
+            WHERE e.EventDate >= CAST(GETDATE() AS DATE)
+            ORDER BY e.EventDate ASC
+        `);
+
+        res.status(200).json(result.recordset);
     } catch (err) {
-        console.error("❌ SQL Error:", err.message);
+        console.error("Get Events Error:", err.message);
         res.status(500).json({ error: err.message });
     }
 });
 
-// 2. Add event
 router.post('/add', async (req, res) => {
-    const { title, date, time, category, location, publishedBy } = req.body;
+    const { title, date, time, category, location, adminId } = req.body;
+
+    if (!title || !date || !time || !category || !location) {
+        return res.status(400).json({ 
+            error: "All fields are required" 
+        });
+    }
+
     try {
         let pool = await sql.connect(config);
-        await pool.request()
-            .input('title', sql.VarChar, title)
-            .input('date', sql.Date, date)
-            .input('time', sql.VarChar, time) // String එකක් ලෙස යවන්න (e.g. "14:00")
-            .input('category', sql.VarChar, category)
-            .input('location', sql.VarChar, location)
-            .input('publishedBy', sql.VarChar, publishedBy)
-            .query(`INSERT INTO Events (EventTitle, EventDate, EventTime, Category, Location, PublishedBy) 
-                    VALUES (@title, @date, @time, @category, @location, @publishedBy)`);
 
-        res.status(200).json({ message: "Success" });
+        await pool.request()
+            .input('AdminID', sql.Int, adminId || 1)
+            .input('Title', sql.NVarChar, title)
+            .input('Date', sql.Date, date)
+            .input('Time', sql.NVarChar, time)
+            .input('Category', sql.NVarChar, category)
+            .input('Location', sql.NVarChar, location)
+            .query(`
+                INSERT INTO Events 
+                (AdminID, EventTitle, EventDate, EventTime, Category, Location, CreatedAt)
+                VALUES 
+                (@AdminID, @Title, @Date, CAST(@Time AS TIME), @Category, @Location, GETDATE())
+            `);
+
+        res.status(200).json({ message: "Event added successfully!" });
     } catch (err) {
-        console.error("❌ Insert Error:", err.message);
+        console.error("Add Event Error:", err.message);
         res.status(500).json({ error: err.message });
     }
 });
 
-// 3. Delete event
 router.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
+
     try {
         let pool = await sql.connect(config);
+
         await pool.request()
-            .input('id', sql.Int, id)
-            .query("DELETE FROM Events WHERE EventID = @id");
-            
-        res.status(200).json({ message: "Deleted" });
+            .input('EventID', sql.Int, id)
+            .query("DELETE FROM Events WHERE EventID = @EventID");
+
+        res.status(200).json({ message: "Event deleted!" });
     } catch (err) {
-        console.error("❌ Delete Error:", err.message);
+        console.error("Delete Event Error:", err.message);
         res.status(500).json({ error: err.message });
     }
 });

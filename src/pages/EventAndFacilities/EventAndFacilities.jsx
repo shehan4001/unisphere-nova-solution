@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import './EventAndFacilities.css';
+import { markTaskVisited } from "../../utils/taskProgress";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import bgImage from '../../assets/images/banner-bg.png'; 
 
-// Assets
+
 import bannerImg from '../../assets/images/event-hero-banner.svg';
 import CafeteriaIcon from '../../assets/images/Cafeteria.svg'; 
 import GymIcon from '../../assets/images/Gym.svg';
@@ -26,11 +27,27 @@ import clinicModalImg from '../../assets/images/clinic-modal.svg';
 import libraryModalImg from '../../assets/images/library-modal.svg';
 import stadiumModalImg from '../../assets/images/stadium-modal.svg';
 
+
+import aircraftVideo from '../../assets/videos/aircraft.mp4';
+import gymVideo from '../../assets/videos/gym.mp4';
+import libraryVideo from '../../assets/videos/library.mp4';
+import mainBuildingVideo from '../../assets/videos/main building.mp4';
+import mainCafeVideo from '../../assets/videos/main cafe.mp4';
+import openCafeVideo from '../../assets/videos/open cafe.mp4';
+import zinethVideo from '../../assets/videos/Zineth building gfloor.mp4';
+import mapImg from '../../assets/images/map.png';
+
 const EventAndFacilities = () => {
   const [selectedFacility, setSelectedFacility] = useState(null);
   const [events, setEvents] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
-  // 1. Backend එකෙන් Events ලබා ගැනීම
+useEffect(() => {
+  markTaskVisited("explore_events");
+  markTaskVisited("read_facility_update");
+}, []);
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -80,12 +97,62 @@ const EventAndFacilities = () => {
     { id: 6, name: 'Event Hall', desc: 'Host to ceremonies and guest lectures.', image: EventHallImg },
   ];
 
+  const campusRoutes = [
+    {
+      id: 1,
+      name: "Main Building",
+      desc: "Navigate to the main university building.",
+      video: mainBuildingVideo,
+    },
+    {
+      id: 2,
+      name: "Main Library",
+      desc: "Navigate to the library and study area.",
+      video: libraryVideo,
+    },
+    {
+      id: 3,
+      name: "Gym",
+      desc: "Navigate to the gym and fitness center.",
+      video: gymVideo,
+    },
+    {
+      id: 4,
+      name: "Main Cafe",
+      desc: "Navigate to the main cafeteria.",
+      video: mainCafeVideo,
+    },
+    {
+      id: 5,
+      name: "Open Cafe",
+      desc: "Navigate to the open cafe area.",
+      video: openCafeVideo,
+    },
+    {
+      id: 6,
+      name: "Aircraft Area",
+      desc: "Navigate to the aircraft learning area.",
+      video: aircraftVideo,
+    },
+    {
+      id: 7,
+      name: "Zineth Building",
+      desc: "Navigate through Zineth building floor.",
+      video: zinethVideo,
+    },
+  ];
+
+  const handleNavigate = (route) => {
+    setSelectedVideo(route.video);
+    setSelectedPlace(route.name);
+  };
+
   return (
     <div className="event-facilities-page" style={{ backgroundImage: `url(${bgImage})` }}>
       <Header />
       
       <main className="ef-container">
-        {/* Banner Section */}
+      
         <section className="ef-banner" style={{ "--banner-img": `url(${bannerImg})` }}>
           <div className="ef-banner-content">
             <h1>Facility & Event Updates</h1>
@@ -93,7 +160,7 @@ const EventAndFacilities = () => {
           </div>
         </section>
 
-        {/* Facilities Section */}
+     
         <section className="ef-section">
           <h3>Campus Facilities</h3>
           <div className="facilities-scroll">
@@ -108,16 +175,15 @@ const EventAndFacilities = () => {
           </div>
         </section>
 
-        {/* Upcoming Events Section - (FIXED) */}
         <section className="ef-section">
           <div className="ef-section-header">
             <h3>Upcoming Events</h3>
             <span className="ef-view-more">Latest Updates</span>
           </div>
+
           <div className="ef-events-list">
             {events && events.length > 0 ? (
               events.map(e => {
-                // Timezone offset එක මගහරවා ගැනීමට UTC අගයන් භාවිතා කරයි
                 const eventDate = e.EventDate ? new Date(e.EventDate) : new Date();
                 const day = String(eventDate.getUTCDate()).padStart(2, '0');
                 const month = eventDate.toLocaleString('default', { month: 'short', timeZone: 'UTC' }).toUpperCase();
@@ -128,14 +194,15 @@ const EventAndFacilities = () => {
                       <span className="ef-date-num">{day}</span>
                       <span className="ef-date-month">{month}</span>
                     </div>
+
                     <div className="ef-event-details">
                       <div className="ef-meta">
                         <span className={`ef-tag ${(e.Category || "general").toLowerCase()}`}>
                           {e.Category || "GENERAL"}
                         </span>
-                        {/* Backend එකෙන් format වී එන වෙලාව මෙහිදී පෙන්වයි */}
                         <span className="ef-time">• {e.EventTime}</span>
                       </div>
+
                       <h4>{e.EventTitle}</h4>
                       <p>{e.Location}</p>
                     </div>
@@ -152,7 +219,63 @@ const EventAndFacilities = () => {
           </div>
         </section>
 
-        {/* Campus Spaces Section */}
+   
+        <section className="ef-section">
+          <div className="ef-section-header">
+            <h3>Campus Navigation</h3>
+            <span className="ef-view-more">
+              {selectedPlace ? `Now Playing: ${selectedPlace}` : "Explore Campus"}
+            </span>
+          </div>
+
+          <div className="campus-navigation-wrapper">
+            <div className="campus-nav-list">
+              {campusRoutes.map(route => (
+                <div
+                  key={route.id}
+                  className={`campus-nav-card ${selectedPlace === route.name ? "active" : ""}`}
+                >
+                  <div>
+                    <h4>{route.name}</h4>
+                    <p>{route.desc}</p>
+                  </div>
+
+                  <button
+                    className="campus-nav-btn"
+                    onClick={() => handleNavigate(route)}
+                  >
+                    Navigate
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="campus-map-container">
+              {selectedVideo ? (
+                <video
+                  key={selectedVideo}
+                  className="campus-video"
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                >
+                  <source src={selectedVideo} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <img
+                  src={mapImg}
+                  alt="Campus Map"
+                  className="campus-video"
+                />
+              )}
+            </div>
+          </div>
+        </section>
+
+        
         <section className="ef-section">
           <h3>Campus Spaces</h3>
           <div className="ef-spaces-grid">
@@ -161,6 +284,7 @@ const EventAndFacilities = () => {
                 <div className="ef-space-img-container">
                   <img src={s.image} alt={s.name} />
                 </div>
+
                 <div className="ef-space-info">
                   <h4>{s.name}</h4>
                   <p>{s.desc}</p>
@@ -171,7 +295,6 @@ const EventAndFacilities = () => {
         </section>
       </main>
 
-      {/* Facility Details Modal */}
       {selectedFacility && (
         <div className="ef-modal-overlay" onClick={() => setSelectedFacility(null)}>
           <div className="ef-modal-card" onClick={e => e.stopPropagation()}>
@@ -179,13 +302,16 @@ const EventAndFacilities = () => {
               <img src={selectedFacility.modalImg} alt={selectedFacility.name} />
               <button className="ef-close-btn" onClick={() => setSelectedFacility(null)}>&times;</button>
             </div>
+
             <div className="ef-modal-body">
               <h2>{selectedFacility.name}</h2>
               <p className="ef-modal-desc">{selectedFacility.desc}</p>
+
               <div className="ef-modal-contact">
                 <span className="contact-label">CONTACT INFO</span>
                 <p>{selectedFacility.contact}</p>
               </div>
+
               <div className="ef-modal-amenities">
                 <span className="contact-label">AVAILABLE AMENITIES</span>
                 <div className="ef-modal-tags">

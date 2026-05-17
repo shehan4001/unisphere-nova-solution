@@ -26,7 +26,7 @@ const Header = () => {
     const saved = localStorage.getItem('user');
     if (saved) {
       const savedUser = JSON.parse(saved);
-      // Database අනුව දත්ත ගැලපීම
+
       setUser({
         dbId: savedUser.ID || "",
         displayId: savedUser.CustomID || "N/A", 
@@ -51,7 +51,7 @@ const Header = () => {
 
   const getInitials = (name) => {
     if (!name || typeof name !== 'string') return "U";
-    const nameArray = name.trim().split(/\s+/); // ඉඩ කිහිපයක් තිබුණද නිවැරදිව වෙන් කරයි
+    const nameArray = name.trim().split(/\s+/); 
     if (nameArray.length >= 2) {
       return (nameArray[0].charAt(0) + nameArray[1].charAt(0)).toUpperCase();
     }
@@ -65,7 +65,7 @@ const Header = () => {
     }
 
     try {
-      // Backend route එකට අනුකූලව API call එක
+      
       await axios.put(`http://localhost:5000/api/students/update/${user.dbId}`, {
         FullName: formData.name,
         Email: formData.email
@@ -87,7 +87,7 @@ const Header = () => {
   return (
     <header className="main-header">
       <div className="header-left">
-        {/* CSSGap එක පාලනය කිරීමට inline style එකක් හෝ CSS පන්තියක් භාවිතා කළ හැක */}
+      
         <div className="logo-section" onClick={() => navigate('/menu')} style={{cursor: 'pointer', gap: '8px'}}>
           <img src={logoImg} alt="UniSphere Logo" className="header-logo" style={{width: '60px'}} />
           <span className="header-brand-name">UniSphere</span>

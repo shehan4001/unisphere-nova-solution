@@ -1,10 +1,18 @@
+.reward-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #F8FAFC;
+  font-family: 'Inter', sans-serif;
+}
+
 .reward-page-wrapper {
   width: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
   background-color: #F8FAFC;
-  padding: 40px 0;
-  font-family: 'Inter', sans-serif;
+  padding: 30px 0;
 }
 
 .reward-container {
@@ -17,10 +25,10 @@
 
 .reward-hero-banner {
   width: 100%;
-  height: 200px;
+  min-height: 170px;
   background: linear-gradient(90deg, #003366 0%, #2563eb 100%);
   border-radius: 24px;
-  padding: 0 60px;
+  padding: 28px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,21 +37,42 @@
   color: white;
 }
 
-.reward-hero-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.reward-hero-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.reward-hero-subtitle {
+  font-size: 14px;
+  margin: 0;
+}
 
 .points-balance-card {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
-  padding: 24px 40px;
+  padding: 22px 38px;
   border-radius: 20px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10;
 }
 
-.points-label { font-size: 12px; opacity: 0.9; margin-bottom: 4px; }
-.points-number { font-size: 36px; font-weight: 800; }
-.points-unit { font-size: 18px; margin-left: 4px; }
+.points-label {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.points-number {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.points-unit {
+  font-size: 18px;
+  margin-left: 4px;
+}
 
 .banner-qr-overlay {
   position: absolute;
@@ -61,7 +90,7 @@
 
 .reward-action-grid {
   display: block;
-  margin-top: 32px;
+  margin-top: 28px;
 }
 
 .action-card {
@@ -73,9 +102,17 @@
   gap: 20px;
   border: 1px solid #F1F5F9;
   box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.light-blue-bg { background-color: #EFF6FF; }
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+}
+
+.light-blue-bg {
+  background-color: #EFF6FF;
+}
 
 .action-icon-box {
   width: 50px;
@@ -86,36 +123,86 @@
   justify-content: center;
 }
 
-.action-info { flex: 1; }
-.action-title { font-size: 16px; font-weight: 700; color: #1E293B; margin: 0; }
-.action-desc { font-size: 13px; color: #64748B; margin-top: 4px; }
-
-.view-shop-btn { 
-  background: #F1F5F9; 
-  color: #1E293B; 
-  border: none; 
-  padding: 10px 24px; 
-  border-radius: 10px; 
-  font-weight: 700; 
-  cursor: pointer; 
+.action-info {
+  flex: 1;
 }
 
-.section-header-row { display: flex; justify-content: space-between; margin: 40px 0 20px; align-items: center; }
-.section-title { font-size: 18px; font-weight: 700; color: #1E293B; }
-
-.featured-rewards-grid { 
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 24px; 
+.action-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
 }
 
-.reward-item { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #F1F5F9; transition: transform 0.2s; }
-.reward-item:hover { transform: translateY(-4px); }
+.action-desc {
+  font-size: 13px;
+  color: #64748B;
+  margin-top: 4px;
+}
 
-.reward-img-container { height: 160px; width: 100%; overflow: hidden; } 
-.reward-img-container img { width: 100%; height: 100%; object-fit: cover; }
+.view-shop-btn {
+  background: #F1F5F9;
+  color: #1E293B;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
 
-.reward-details { padding: 16px; }
+.view-shop-btn:hover {
+  background: #E2E8F0;
+  transform: translateY(-1px);
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 36px 0 20px;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.featured-rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.reward-item {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #F1F5F9;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reward-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+}
+
+.reward-img-container {
+  height: 160px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.reward-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reward-details {
+  padding: 16px;
+}
 
 .reward-header-inline {
   display: flex;
@@ -124,11 +211,11 @@
   margin-bottom: 8px;
 }
 
-.reward-header-inline h4 { 
-  font-size: 15px; 
-  margin: 0; 
-  color: #0F172A; 
-  font-weight: 700; 
+.reward-header-inline h4 {
+  font-size: 15px;
+  margin: 0;
+  color: #0F172A;
+  font-weight: 700;
   flex: 1;
 }
 
@@ -144,45 +231,131 @@
   white-space: nowrap;
 }
 
-.reward-details p { font-size: 12px; color: #64748B; line-height: 1.5; margin-bottom: 16px; height: 36px; overflow: hidden; }
+.reward-details p {
+  font-size: 12px;
+  color: #64748B;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  height: 36px;
+  overflow: hidden;
+}
 
-.redeem-btn { width: 100%; padding: 10px; border: 1px solid #E2E8F0; background: white; border-radius: 8px; font-weight: 700; cursor: pointer; }
-.redeem-btn-disabled { width: 100%; padding: 10px; background: #F8FAFC; border: 1px solid #F1F5F9; color: #94A3B8; border-radius: 8px; font-weight: 700; }
+.redeem-btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #E2E8F0;
+  background: white;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
 
-.mt-30 { margin-top: 30px; }
-.activity-list { background: white; border-radius: 20px; padding: 10px 24px; border: 1px solid #F1F5F9; }
-.activity-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #F8FAFC; }
-.activity-item:last-child { border-bottom: none; }
-.activity-main { display: flex; align-items: center; gap: 16px; }
-.activity-check-icon { width: 32px; height: 32px; background: #ECFDF5; color: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.redeem-btn:hover {
+  background: #F8FAFC;
+  transform: translateY(-1px);
+}
 
+.redeem-btn-disabled {
+  width: 100%;
+  padding: 10px;
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  color: #94A3B8;
+  border-radius: 8px;
+  font-weight: 700;
+}
 
-.blue-icon { background: #EFF6FF; color: #3B82F6; }
-.orange-icon { background: #FFF7ED; color: #F97316; } 
+.mt-30 {
+  margin-top: 30px;
+}
 
-.act-title { font-size: 14px; font-weight: 600; color: #1E293B; margin: 0; }
-.act-date { font-size: 12px; color: #94A3B8; margin-top: 2px; }
+.view-all-btn {
+  background: none;
+  border: none;
+  color: #003366;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
 
+.view-all-btn:hover {
+  opacity: 0.7;
+}
 
-.points-added { color: #10B981; font-weight: 700; font-size: 14px; }
-.points-subtracted { color: #EF4444; font-weight: 700; font-size: 14px; } 
+.activity-list {
+  background: white;
+  border-radius: 20px;
+  padding: 10px 24px;
+  border: 1px solid #F1F5F9;
+  margin-bottom: 30px;
+}
 
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #F8FAFC;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.act-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 0;
+}
+
+.act-date {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.points-added {
+  color: #10B981;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.points-subtracted {
+  color: #EF4444;
+  font-weight: 700;
+  font-size: 14px;
+}
 
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 20px;
 }
 
 .modal-content {
   background: white;
   width: 420px;
+  max-width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
   border-radius: 24px;
   padding: 24px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -191,37 +364,95 @@
 .modal-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 24px;
+  position: relative;
 }
 
-.modal-header-left { display: flex; gap: 16px; align-items: flex-start; }
-
-.flash-icon-box {
-  background: #001A3D; 
-  color: #3B82F6; 
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+.modal-header-left {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 16px;
+  align-items: flex-start;
 }
 
-.modal-header h3 { margin: 0; font-size: 18px; color: #0F172A; font-weight: 700; }
-.modal-header p { margin: 4px 0 0 0; font-size: 12px; color: #64748B; line-height: 1.4; }
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.modal-header p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #64748B;
+  line-height: 1.4;
+}
 
 .close-modal {
-  background: none; border: none;
-  font-size: 24px; color: #94A3B8;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #94A3B8;
   cursor: pointer;
+  line-height: 1;
+}
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
-.challenges-list { display: flex; flex-direction: column; gap: 20px; }
-.challenge-item { display: flex; flex-direction: column; gap: 4px; }
-.challenge-info { display: flex; justify-content: space-between; align-items: flex-start; }
-.challenge-info h4 { margin: 0; font-size: 14px; color: #1E293B; font-weight: 600; }
-.challenge-info p { margin: 2px 0 0 0; font-size: 11px; color: #94A3B8; }
-.challenge-pts { color: #2563EB; font-weight: 700; font-size: 13px; }
+.challenges-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.challenges-list::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 10px;
+}
+
+.challenges-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.challenge-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.challenge-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.challenge-info h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #1E293B;
+  font-weight: 600;
+}
+
+.challenge-info p {
+  margin: 2px 0 0 0;
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+.challenge-pts {
+  color: #2563EB;
+  font-weight: 700;
+  font-size: 13px;
+}
 
 .progress-bar-container {
   height: 6px;
@@ -233,12 +464,8 @@
 
 .progress-bar {
   height: 100%;
-  background: #001A3D; 
+  background: #001A3D;
   border-radius: 10px;
-}
-
-.faint-progress {
-  background: #E2E8F0 !important; 
 }
 
 .status-btn {
@@ -254,18 +481,107 @@
   margin-top: 4px;
 }
 
-.modal-footer {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #F1F5F9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Responsive */
+
+@media (max-width: 900px) {
+  .featured-rewards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reward-hero-banner {
+    padding: 28px 36px;
+  }
+
+  .banner-qr-overlay {
+    right: 120px;
+  }
 }
 
-.modal-footer span { font-size: 11px; color: #94A3B8; }
-.view-all-tasks {
-  background: none; border: none;
-  color: #0F172A; font-weight: 700;
-  font-size: 12px; cursor: pointer;
+@media (max-width: 700px) {
+  .reward-page-wrapper {
+    padding: 24px 0;
+  }
+
+  .reward-container {
+    margin: 0 20px;
+  }
+
+  .reward-hero-banner {
+    min-height: auto;
+    padding: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .reward-hero-title {
+    font-size: 24px;
+  }
+
+  .points-balance-card {
+    width: 100%;
+    padding: 18px 24px;
+  }
+
+  .banner-qr-overlay {
+    right: 20px;
+    top: 35px;
+    transform: none;
+  }
+
+  .qr-background-img {
+    width: 120px;
+  }
+
+  .action-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .view-shop-btn {
+    width: 100%;
+  }
+
+  .featured-rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-item {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .modal-content {
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reward-container {
+    margin: 0 16px;
+  }
+
+  .reward-hero-banner {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .reward-hero-title {
+    font-size: 22px;
+  }
+
+  .reward-hero-subtitle {
+    font-size: 13px;
+  }
+
+  .points-number {
+    font-size: 30px;
+  }
+
+  .modal-header-left {
+    gap: 12px;
+  }
 }

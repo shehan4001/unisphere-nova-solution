@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import bgImage from '../../assets/images/banner-bg.png';
 import searchIcon from '../../assets/images/Search-icon.svg';
+import { markTaskVisited } from "../../utils/taskProgress";
 
 const CampusClubs = () => {
   const [activeCategory, setActiveCategory] = useState('All Categories');
@@ -12,7 +13,7 @@ const CampusClubs = () => {
   const [clubs, setClubs] = useState([]);
 
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const currentStudentName = storedUser?.FullName || null;
+  const currentStudentId = storedUser?.ID || null;
 
   const categories = [
     'All Categories',
@@ -29,9 +30,10 @@ const CampusClubs = () => {
       const clubsRes = await axios.get('http://localhost:5000/api/clubs/all');
 
       let statusData = {};
-      if (currentStudentName) {
+
+      if (currentStudentId) {
         const statusRes = await axios.get(
-          `http://localhost:5000/api/clubs/user-status/${currentStudentName}`
+          `http://localhost:5000/api/clubs/user-status/${currentStudentId}`
         );
         statusData = statusRes.data || {};
       }
@@ -60,19 +62,23 @@ const CampusClubs = () => {
   };
 
   useEffect(() => {
+    markTaskVisited("explore_campus_clubs");
+  }, []);
+
+  useEffect(() => {
     fetchClubs();
-  }, [currentStudentName]);
+  }, [currentStudentId]);
 
   const handleJoin = async (club) => {
-    if (!currentStudentName) {
+    if (!currentStudentId) {
       alert('Please login first!');
       return;
     }
 
     try {
       await axios.post('http://localhost:5000/api/clubs/join', {
-        studentName: currentStudentName,
-        clubName: club.name,
+        studentId: currentStudentId,
+        clubId: club.id,
       });
 
       alert(`Request sent to ${club.name}`);
@@ -91,6 +97,7 @@ const CampusClubs = () => {
       activeCategory === 'All Categories' ||
       c.category.toLowerCase() === activeCategory.toLowerCase();
     const matchesSearch = c.name.toLowerCase().includes(searchTerm.toLowerCase());
+
     return isNew && matchesCategory && matchesSearch;
   });
 
@@ -102,12 +109,9 @@ const CampusClubs = () => {
       <Header />
 
       <div className="clubs-overlay-content">
-
-        {/* HEADER */}
         <header className="clubs-header">
           <h1>Campus Clubs Connector</h1>
 
-          {/* SEARCH + DISCOVER */}
           <div className="search-section">
             <div className="search-input-wrapper">
               <img src={searchIcon} alt="search" className="search-icon-img" />
@@ -127,7 +131,6 @@ const CampusClubs = () => {
             </button>
           </div>
 
-          {/* FILTERS */}
           <div className="category-filters">
             {categories.map((cat) => (
               <button
@@ -141,7 +144,6 @@ const CampusClubs = () => {
           </div>
         </header>
 
-        {/* YOUR CLUBS */}
         {yourClubs.length > 0 &&
           activeCategory === 'All Categories' &&
           !searchTerm && (
@@ -153,6 +155,7 @@ const CampusClubs = () => {
                     {club.image && (
                       <img src={club.image} alt={club.name} className="club-image" />
                     )}
+
                     <div className="club-info">
                       <h3>{club.name}</h3>
                       <button className="btn-member">Member</button>
@@ -163,7 +166,6 @@ const CampusClubs = () => {
             </section>
           )}
 
-        {/* REQUESTED CLUBS */}
         {pendingClubs.length > 0 &&
           activeCategory === 'All Categories' &&
           !searchTerm && (
@@ -175,6 +177,7 @@ const CampusClubs = () => {
                     {club.image && (
                       <img src={club.image} alt={club.name} className="club-image" />
                     )}
+
                     <div className="club-info">
                       <h3>{club.name}</h3>
                       <button className="btn-pending">Pending</button>
@@ -185,9 +188,9 @@ const CampusClubs = () => {
             </section>
           )}
 
-        {/* ALL ORGANIZATIONS */}
         <section className="clubs-section">
           <h2>All Organizations</h2>
+
           <div className="clubs-grid">
             {availableClubs.length > 0 ? (
               availableClubs.map((club) => (
@@ -195,6 +198,7 @@ const CampusClubs = () => {
                   {club.image && (
                     <img src={club.image} alt={club.name} className="club-image" />
                   )}
+
                   <div className="club-info">
                     <h3>{club.name}</h3>
                     <p>{club.desc}</p>
@@ -213,7 +217,6 @@ const CampusClubs = () => {
             )}
           </div>
         </section>
-
       </div>
 
       <Footer />

@@ -4,7 +4,7 @@
 
 .admin-page-content {
   flex: 1;
-  /* Sidebar Width එක 260px නිසා හරියටම ඒ ගාණ මෙතනට දෙන්න */
+ 
   margin-left: 260px; 
   padding: 40px;
   min-height: 100vh;
@@ -17,7 +17,7 @@
 /* Stats Cards Styling */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* අයිකන 4ක් ඇති බැවින් 4ක් ලෙස සකස් කළා */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 20px;
   margin-bottom: 50px;
 }
@@ -32,7 +32,7 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
-/* --- අලුතින් එක් කළ Icon රූප සඳහා CSS --- */
+
 .stat-icon-wrapper {
   width: 55px;
   height: 55px;
@@ -54,7 +54,7 @@
   object-fit: contain;
   margin-bottom: 12px;
 }
-/* -------------------------------------- */
+
 
 .stat-icon {
   width: 55px;
@@ -91,7 +91,7 @@
 
 .quick-action-card {
   flex: 1;
-  background: none; /* Button එකක් නිසා background එක ඉවත් කළා */
+  background: none; 
   border: 1.5px dashed #e2e8f0;
   padding: 30px;
   border-radius: 15px;
@@ -118,7 +118,7 @@
   margin-bottom: 10px;
 }
 
-/* Welcome back text එක සඳහා styles */
+
 .welcome-text p {
   font-size: 15px;        
   font-weight: 400;         
@@ -130,7 +130,7 @@
 
 .welcome-text h1 {
   font-size: 28px;
-  color: #0f172a;          /* තද පැහැයක් (Slate-900) */
+  color: #0f172a;          
   font-weight: 800;
   margin: 0;
 }

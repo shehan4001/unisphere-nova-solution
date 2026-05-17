@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Link එක import කරන්න
+import { useNavigate, Link } from 'react-router-dom'; 
 import './ForgotPassword.css';
 import bgImage from '../../assets/images/background.png'; 
 import resetIcon from '../../assets/images/reset-icon.png'; 

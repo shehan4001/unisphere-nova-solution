@@ -1,4 +1,4 @@
-/* Layout & Container */
+
 .form-container-card, .student-list-container {
   background: white;
   border-radius: 20px;
@@ -7,7 +7,7 @@
   margin-top: 25px;
 }
 
-/* Animations */
+
 .animate-fade {
   animation: fadeIn 0.4s ease-in-out;
 }
@@ -24,7 +24,7 @@
   font-weight: 700;
 }
 
-/* Form Styles */
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -59,7 +59,7 @@
   cursor: not-allowed;
 }
 
-/* Header & Toggle Button */
+
 .page-header-simple {
   display: flex;
   justify-content: space-between;
@@ -82,7 +82,7 @@
   transform: translateY(-2px);
 }
 
-/* Submit Button */
+
 .form-actions-right {
   display: flex;
   justify-content: flex-end;
@@ -99,7 +99,7 @@
   cursor: pointer;
 }
 
-/* Table Section Controls */
+
 .log-header {
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,7 @@
   align-items: center;
 }
 
-/* Search Box & Filter Dropdown එක සමානව හැදීම */
+
 .table-search, .filter-select {
   padding: 10px 20px;
   border-radius: 10px;
@@ -139,7 +139,7 @@
   box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.1);
 }
 
-/* Action Buttons */
+
 .action-btns {
   display: flex;
   gap: 8px;
@@ -160,7 +160,7 @@
 .btn-delete { background: #fff5f5; color: #c53030; }
 .btn-delete:hover { background: #c53030; color: white; }
 
-/* Status Badge */
+
 .badge-status {
   padding: 5px 12px;
   border-radius: 50px;
@@ -174,7 +174,7 @@
   color: #22543d; 
 }
 
-/* Table Styling */
+
 .table-wrapper {
   overflow-x: auto;
 }

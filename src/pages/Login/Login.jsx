@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SplashScreen from '../SplashScreen/SplashScreen'; 
 import './Login.css';
 import axios from 'axios'; 
+import { markTaskVisited } from "../../utils/taskProgress";
 
 // Assets Import
 import logoImg from '../../assets/images/login logo.png'; 
@@ -49,21 +50,21 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // FIX: 'id' වෙනුවට 'userId' ලෙස වෙනස් කළා
+     
       const response = await axios.post('http://localhost:5000/api/login', {
           customID: userId, 
           password: password
       });
 
       if (response.data.success) {
-        // 1. කලින් සිටි User දත්ත මකා දමන්න
+       
         localStorage.clear(); 
 
-        // 2. අලුත් User දත්ත localStorage එකේ සේව් කරන්න
+        
         localStorage.setItem('user', JSON.stringify(response.data.user));
+        markTaskVisited("daily_login");
 
-        // 3. Role එක අනුව අදාළ Dashboard එකට යවන්න
-        // Backend එකෙන් එවන්නේ "Admin" හෝ "Student" ලෙසයි
+       
         if (response.data.user.Role === 'Admin') {
           navigate('/admin/dashboard'); 
         } else {
@@ -75,7 +76,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login Error:", error);
-      // Backend එකෙන් එවන Error Message එක පෙන්වීම
+      
       const errorMsg = error.response?.data?.message || "Login failed! Please check your ID and Password.";
       alert(errorMsg);
     } finally {

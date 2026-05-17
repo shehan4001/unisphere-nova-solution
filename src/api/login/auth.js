@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     try {
         let pool = await sql.connect(config);
 
-        // Student Check - CustomID එක SELECT කිරීමට එක් කළා
+
         let studentResult = await pool.request()
             .input('id', sql.NVarChar, customID)
             .input('pass', sql.NVarChar, password)
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
             });
         }
 
-        // Admin Check - CustomID එක SELECT කිරීමට එක් කළා
+   
         let adminResult = await pool.request()
             .input('id', sql.NVarChar, customID)
             .input('pass', sql.NVarChar, password)

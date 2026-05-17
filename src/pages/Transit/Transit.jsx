@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { markTaskVisited } from "../../utils/taskProgress";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./Transit.css";
 
-// ── Route data ──
+
 const ROUTES = [
   {
     name: "CINEC → Gampaha Town",
@@ -28,14 +29,14 @@ const ROUTES = [
   },
 ];
 
-// ── Google Maps embeds ──
+
 const ROUTE_MAPS = [
   `https://www.google.com/maps/embed/v1/directions?key=AIzaSyB4VW2nE5ku0blzZSqg2mlA6AJtgiDnYro&origin=CINEC+Campus,+Malabe,+Sri+Lanka&destination=Gampaha+Town,+Sri+Lanka&waypoints=Keells+-+Pittugala,+296+Kaduwela+Rd,+Malabe,+Sri+Lanka&avoid=highways`,
   `https://www.google.com/maps/embed/v1/directions?key=AIzaSyB4VW2nE5ku0blzZSqg2mlA6AJtgiDnYro&origin=CINEC+Campus+car+park,+Malabe,+Sri+Lanka&destination=Malabe+Public+Bus+Stand,+Malabe,+Sri+Lanka&avoid=highways`,
   `https://www.google.com/maps/embed/v1/directions?key=AIzaSyB4VW2nE5ku0blzZSqg2mlA6AJtgiDnYro&origin=CINEC+Campus+car+park,+Malabe,+Sri+Lanka&destination=Fort,+Colombo,+Sri+Lanka&waypoints=Malabe+Public+Bus+Stand,+Malabe,+Sri+Lanka|Battaramulla+Junction+Bus+Station,+Battaramulla,+Sri+Lanka|Bus+Stop,+Colombo,+Sri+Lanka&avoid=highways`,
 ];
 
-// ── Live badge ──
+
 function LiveBadge() {
   return (
     <div className="live-badge">
@@ -45,7 +46,7 @@ function LiveBadge() {
   );
 }
 
-// ── Route item ──
+
 function RouteItem({ route, isActive, onClick }) {
   return (
     <div
@@ -68,29 +69,33 @@ function RouteItem({ route, isActive, onClick }) {
     </div>
   );
 }
-
-// ── Main component ──
+ 
 export default function Transit() {
   const [activeRoute, setActiveRoute] = useState(0);
 
+  useEffect(() => {
+    markTaskVisited("check_transit_routes");
+  }, []);
+
+
   return (
     <>
-      {/* HEADER */}
+      
       <Header />
 
       <div className="transit-page">
         <main className="transit-main">
 
-          {/* PAGE HEADER */}
+         
           <div className="page-header">
             <h1>Transit & Navigation</h1>
             <p>Real-time campus shuttle tracking and facility status.</p>
           </div>
 
-          {/* TRACKER */}
+          
           <div className="tracker-card">
 
-            {/* TOP BAR */}
+           
             <div className="tracker-header">
               <div className="tracker-title">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -105,7 +110,7 @@ export default function Transit() {
               <LiveBadge />
             </div>
 
-            {/* MAP AREA */}
+        
             <div className="map-area">
 
               <iframe
@@ -117,7 +122,6 @@ export default function Transit() {
                 src={ROUTE_MAPS[activeRoute]}
               />
 
-              {/* SIDEBAR */}
               <div className="overlay-sidebar">
 
                 <div className="sidebar-header">
@@ -152,7 +156,7 @@ export default function Transit() {
 
         </main>
 
-        {/* FOOTER */}
+        
         <Footer />
       </div>
     </>

@@ -1,6 +1,6 @@
 import sql from 'mssql';
 
-// 1. Database එකට සම්බන්ධ වීමට අවශ්‍ය Configuration දත්ත
+
 export const config = {
     user: 'unisphere_user', 
     password: 'User@123', 
@@ -8,8 +8,8 @@ export const config = {
     port: 1433,
     database: 'UniSphereDB',
     options: {
-        encrypt: true, // SQL Azure වැනි cloud database සඳහා අවශ්‍යයි
-        trustServerCertificate: true, // Local development වලදී self-signed certificates සඳහා
+        encrypt: true, 
+        trustServerCertificate: true, 
     },
     pool: {
         max: 10,
@@ -18,10 +18,10 @@ export const config = {
     }
 };
 
-// 2. ES Modules වලදී 'import config from...' ලෙස භාවිතා කිරීමට මෙය අනිවාර්යයි
+
 export default config; 
 
-// 3. පහත කොටස Connection එක test කර බැලීමට භාවිතා කළ හැක
+
 export const connectDB = async () => {
     try {
         let pool = await sql.connect(config);
