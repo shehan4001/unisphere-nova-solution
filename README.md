@@ -1,18 +1,79 @@
-# React + Vite
+# UniSphere Database Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Database Management System
+- Microsoft SQL Server
+- SQL Server Management Studio (SSMS)
 
-Currently, two official plugins are available:
+## Technologies Used
+- SQL Server Management Studio 20.2.37.0
+- SQL Server Management Objects (SMO) 17.100.40.0
+- Microsoft T-SQL Parser 17.2.3.1
+- Microsoft Data SqlClient 5.1.5
+- Microsoft .NET Framework 4.0.30319.42000
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Operating System
+- Windows 11
 
-## React Compiler
+## Database Name
+UniSphereDB
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Setup Instructions
 
-Note: This will impact Vite dev & build performances.
+1. Open SQL Server Management Studio (SSMS)
+2. Create a new database named `UniSphereDB`
+3. Open the `schema.sql` file
+4. Execute the SQL queries to create all relational tables
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Relational Tables Included
+- Admins
+- Students
+- Events
+- Clubs
+- ClubRequests
+- StudentPoints
+- ClaimedTasks
+- RewardActivities
+
+---
+
+## Features Supported
+- Student Registration
+- Club Management
+- Event Management
+- Reward System
+- Club Join Requests
+- Dashboard Analytics
+- Relational Database Constraints
+
+---
+
+## SQL Server Engine Information
+
+- Database Engine: Microsoft SQL Server 2025 (RTM)
+- Engine Version: 17.0.1000.7
+- Edition: SQL Server Express
+- Database Environment: SQL Server Management Studio (SSMS)
+
+## Running the UniSphere Web Application
+
+### Start the Backend Server
+
+1. Open a new terminal
+2. Select the UniSphere project folder
+3. Run the following commands:
+
+```bash
+cd src\server
+node server.js
+``` 
+### Start the Frontend Application
+
+1. Open another new terminal  
+2. Select the UniSphere project folder  
+3. Run the following command:
+
+```bash
+npm run dev
+``` 
